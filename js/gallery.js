@@ -72,16 +72,17 @@ const images = [
   
     const img = event.target;
     const source = img.dataset.source;
-    const enlargedImageModal = document.createElement('div');
-    const enlargedPicture = document.createElement('img');
-    enlargedPicture.src = source;
-    enlargedPicture.alt = img.alt;
-    enlargedImageModal.appendChild(enlargedPicture);
   
-    window.basicLightbox.create(enlargedImageModal).show();
+    
+    const instance = basicLightbox.create(`
+      <img src="${source}" alt="${img.alt}" width="800" height="600">
+    `);
+  
+    instance.show();
   }
   
   const gallery = document.querySelector('.gallery');
+  
   
   gallery.append(
     ...images.map(({ preview, original, description }) => {
@@ -105,4 +106,8 @@ const images = [
     })
   );
   
+ 
   gallery.addEventListener('click', enlargePicture);
+  
+
+  
